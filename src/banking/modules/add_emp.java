@@ -5,6 +5,9 @@
  */
 package banking.modules;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +15,10 @@ import javax.swing.JOptionPane;
  * @author benson
  */
 public class add_emp extends javax.swing.JFrame {
-
+Connection conn  = null;
+ PreparedStatement pst = null;
+ ResultSet rs = null;
+    /**
     /**
      * Creates new form add_emp
      */
@@ -45,9 +51,9 @@ public class add_emp extends javax.swing.JFrame {
         txtPosition = new javax.swing.JComboBox();
         txtDate = new org.jdesktop.swingx.JXDatePicker();
         txtEmployement = new javax.swing.JComboBox();
-        txtEmptype = new javax.swing.JTextField();
         txtSupervisor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        txtEmployementtype = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +76,11 @@ public class add_emp extends javax.swing.JFrame {
         jLabel9.setText("SUPERVISOR");
 
         txtPosition.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtPosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPositionActionPerformed(evt);
+            }
+        });
 
         txtEmployement.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -114,16 +125,19 @@ public class add_emp extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSupervisor, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtEmptype)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(txtSupervisor))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(txtEmployementtype))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,16 +169,16 @@ public class add_emp extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtEmployement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(txtEmptype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtEmployementtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,13 +201,28 @@ public class add_emp extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-            String sql="Insert into employees (name,gender,age,position,sdate,department,emptype,supervisor) value (?,?,?,?,?,?,?,?) ";
+       String sql="Insert into employees (name,gender,age,position,sdate,department,emptype,supervisor) value (?,?,?,?,?,?,?,?) ";
+       pst = conn.prepareStatement(sql);
+       pst.setString(1 , txtname.getText());
+        pst.setString(2 , txtGender.getText());
+         pst.setString(3 , txtAge.getText());
+          pst.setString(4 , txtPosition.getSelectedItem().toString());
+           pst.setString(15 , txtDate.getDate().toString());
+            pst.setString(16 , txtEmployementtype.getText());
+             pst.setString(17 , txtSupervisor.getText());
+       
+       pst.execute() ;
+        JOptionPane.showMessageDialog(null, "saved");
         }
         
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPositionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPositionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,7 +274,7 @@ public class add_emp extends javax.swing.JFrame {
     private javax.swing.JTextField txtAge;
     private org.jdesktop.swingx.JXDatePicker txtDate;
     private javax.swing.JComboBox txtEmployement;
-    private javax.swing.JTextField txtEmptype;
+    private javax.swing.JTextField txtEmployementtype;
     private javax.swing.JTextField txtGender;
     private javax.swing.JComboBox txtPosition;
     private javax.swing.JTextField txtSupervisor;
