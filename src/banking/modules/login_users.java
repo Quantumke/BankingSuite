@@ -43,6 +43,7 @@ public class login_users extends javax.swing.JFrame {
         Exit = new javax.swing.JButton();
         txtpassword = new javax.swing.JPasswordField();
         btnSubmit = new javax.swing.JButton();
+        domain = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -59,6 +60,13 @@ public class login_users extends javax.swing.JFrame {
             }
         });
 
+        domain.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--SELECT A DOMAIN--", "ADMIN", "FINANCE", "HR", "TELLER" }));
+        domain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                domainActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -71,12 +79,13 @@ public class login_users extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtusername)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(domain, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnSubmit)
                                 .addGap(0, 132, Short.MAX_VALUE))
-                            .addComponent(txtpassword))
+                            .addComponent(txtpassword, javax.swing.GroupLayout.Alignment.LEADING))
                         .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
@@ -90,11 +99,13 @@ public class login_users extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
+                .addComponent(domain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Exit)
-                    .addComponent(btnSubmit))
-                .addContainerGap(104, Short.MAX_VALUE))
+                    .addComponent(btnSubmit)
+                    .addComponent(Exit))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,24 +131,36 @@ public class login_users extends javax.swing.JFrame {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         conn = MysqlConnect.ConnectDB();
-        String sql = "select * from user_table where username =? and password =?";
+        String sql = "select * from user_table where username =? and password =? ";
         try{
-            pst=conn.prepareStatement(sql);
-            pst= setString(1,txtusername.getText());
-            pst= setString(2, txtpassword.getText());
+           PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, txtusername.getText());
+            pst.setString(2, txtpassword.getText());
             rs = pst.executeQuery();
             if (rs.next()){
                 JOptionPane.showMessageDialog(null, "WELCOME");
                 index i= new index();
                 i.setVisible(true);
+                
+                
             }
             else
                 JOptionPane.showMessageDialog(null, "Login Failed");
         }
+        
        catch(Exception e){
            JOptionPane.showMessageDialog(null, e);
        }
+        
+   
+   
+        
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void domainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_domainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_domainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,6 +200,7 @@ public class login_users extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Exit;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JComboBox domain;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
@@ -184,7 +208,5 @@ public class login_users extends javax.swing.JFrame {
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
 
-    private PreparedStatement setString(int i, String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 }
