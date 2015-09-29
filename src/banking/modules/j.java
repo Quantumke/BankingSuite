@@ -9,7 +9,7 @@ package banking.modules;
  *
  * @author benson
  */
-public class BankingModules {
+public class j {
 
     /**
      * @param args the command line arguments
