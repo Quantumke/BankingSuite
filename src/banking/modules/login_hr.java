@@ -120,7 +120,7 @@ Connection conn  = null;
           conn = MysqlConnect.ConnectDB();
         String sql = "select * from user_table where username =? and password =? ";
         try{
-           PreparedStatement pst = conn.prepareStatement(sql);
+       PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, txtusername.getText());
             pst.setString(2, txtpassword.getText());
            

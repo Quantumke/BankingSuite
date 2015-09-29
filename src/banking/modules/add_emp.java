@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -18,6 +19,7 @@ public class add_emp extends javax.swing.JFrame {
 Connection conn  = null;
  PreparedStatement pst = null;
  ResultSet rs = null;
+ SimpleDateFormat format=new SimpleDateFormat("YYYY-MM-dd");
     /**
     /**
      * Creates new form add_emp
@@ -41,7 +43,6 @@ Connection conn  = null;
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -49,10 +50,9 @@ Connection conn  = null;
         txtGender = new javax.swing.JTextField();
         txtAge = new javax.swing.JTextField();
         txtPosition = new javax.swing.JComboBox();
-        txtDate = new org.jdesktop.swingx.JXDatePicker();
         txtEmployement = new javax.swing.JComboBox();
         txtSupervisor = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Cmd_Save = new javax.swing.JButton();
         txtEmployementtype = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,8 +66,6 @@ Connection conn  = null;
         jLabel4.setText("AGE");
 
         jLabel5.setText("POSITION");
-
-        jLabel6.setText("START DATE");
 
         jLabel7.setText("DEPARTMENT");
 
@@ -84,10 +82,10 @@ Connection conn  = null;
 
         txtEmployement.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("SUBMIT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Cmd_Save.setText("SUBMIT");
+        Cmd_Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Cmd_SaveActionPerformed(evt);
             }
         });
 
@@ -100,8 +98,7 @@ Connection conn  = null;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -114,7 +111,6 @@ Connection conn  = null;
                     .addComponent(txtGender)
                     .addComponent(txtAge)
                     .addComponent(txtPosition, 0, 177, Short.MAX_VALUE)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmployement, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(99, 99, 99)
@@ -130,7 +126,7 @@ Connection conn  = null;
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(Cmd_Save)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
@@ -160,10 +156,6 @@ Connection conn  = null;
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5))
                     .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -177,8 +169,8 @@ Connection conn  = null;
                     .addComponent(jLabel9)
                     .addComponent(txtSupervisor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(Cmd_Save)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,27 +190,30 @@ Connection conn  = null;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Cmd_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cmd_SaveActionPerformed
         // TODO add your handling code here:
+        conn = MysqlConnect.ConnectDB();
+        String sql="Insert into employees (name,gender,age,position,department,emptype,supervisor) value (?,?,?,?,?,?,?) ";
+
         try{
-       String sql="Insert into employees (name,gender,age,position,sdate,department,emptype,supervisor) value (?,?,?,?,?,?,?,?) ";
-       pst = conn.prepareStatement(sql);
-       pst.setString(1 , txtname.getText());
-        pst.setString(2 , txtGender.getText());
-         pst.setString(3 , txtAge.getText());
-          pst.setString(4 , txtPosition.getSelectedItem().toString());
-           pst.setString(15 , txtDate.getDate().toString());
-            pst.setString(16 , txtEmployementtype.getText());
-             pst.setString(17 , txtSupervisor.getText());
-       
-       pst.execute() ;
-        JOptionPane.showMessageDialog(null, "saved");
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,txtname.getText());
+            pst.setString(2,txtGender.getText());
+            pst.setString(3,txtAge.getText());
+            pst.setString(4,txtPosition.getSelectedItem().toString());
+              pst.setString(5,txtEmployement.getSelectedItem().toString());
+              pst.setString(6,txtEmployementtype.getText());
+            pst.setString(7,txtSupervisor.getText());
+
+            pst.execute() ;
+            JOptionPane.showMessageDialog(null, "saved");
         }
-        
+
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_Cmd_SaveActionPerformed
 
     private void txtPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPositionActionPerformed
         // TODO add your handling code here:
@@ -260,19 +255,17 @@ Connection conn  = null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Cmd_Save;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtAge;
-    private org.jdesktop.swingx.JXDatePicker txtDate;
     private javax.swing.JComboBox txtEmployement;
     private javax.swing.JTextField txtEmployementtype;
     private javax.swing.JTextField txtGender;
