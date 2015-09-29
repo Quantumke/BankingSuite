@@ -4,12 +4,18 @@
  * and open the template in the editor.
  */
 package banking.modules;
+import java.sql;
+import java.swing.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author benson
  */
 public class login_users extends javax.swing.JFrame {
+ Connection conn  = null;
+ PreparedStatememt pst = null;
+ ResultSet rs = null;
 
     /**
      * Creates new form login_users
@@ -44,6 +50,11 @@ public class login_users extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -105,6 +116,28 @@ public class login_users extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        Conn = MysqlConnect.ConnectDB();
+        String sql = "select * from user_table where username =? and password =?"
+        try{
+            pst=conn.prepareStatement(sql);
+            pst=setString(1,txtusername.getText());
+            pst=setString(2, txtpassword.getText());
+            rs = pst.executeQuery();
+            if (rs.next()){
+                JOptionPane.showMessageDialog(null, "WELCOME");
+                index i= new index();
+                i.setVisible(true);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Login Failed",JOptionPane.ERROR_MESSAGE);
+        }
+       catch(Exception e){
+           JOptionPane.showMessageDialog(null, e);
+       }
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     /**
      * @param args the command line arguments
