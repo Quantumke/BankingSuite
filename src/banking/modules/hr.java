@@ -131,6 +131,11 @@ public class hr extends javax.swing.JFrame {
         jMenu1.add(addEmp);
 
         jMenuItem1.setText("EMP List");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem3.setText("Salary Comp");
@@ -239,6 +244,13 @@ public class hr extends javax.swing.JFrame {
            add_emp i= new add_emp();
                 i.setVisible(true);
     }//GEN-LAST:event_addEmpActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here
+        
+                EMP_LIST j= new EMP_LIST();
+                j.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
