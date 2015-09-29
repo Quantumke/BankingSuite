@@ -60,6 +60,7 @@
                               <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="select" alignment="0" min="-2" pref="225" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -71,8 +72,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel2" pref="103" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="select" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="43" max="32767" attributes="0"/>
                   <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
@@ -104,6 +107,22 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="YOUR FINACIAL SOLUTION PARTNER"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="select">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="--SELECT A MODULE---"/>
+                <StringItem index="1" value="ADMIN"/>
+                <StringItem index="2" value="HR"/>
+                <StringItem index="3" value="FINANCE"/>
+                <StringItem index="4" value="TELLER"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -43,7 +43,6 @@ public class login_users extends javax.swing.JFrame {
         Exit = new javax.swing.JButton();
         txtpassword = new javax.swing.JPasswordField();
         btnSubmit = new javax.swing.JButton();
-        domain = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -57,13 +56,6 @@ public class login_users extends javax.swing.JFrame {
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
-            }
-        });
-
-        domain.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--SELECT A DOMAIN--", "ADMIN", "FINANCE", "HR", "TELLER" }));
-        domain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                domainActionPerformed(evt);
             }
         });
 
@@ -81,7 +73,6 @@ public class login_users extends javax.swing.JFrame {
                     .addComponent(txtusername)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(domain, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnSubmit)
                                 .addGap(0, 132, Short.MAX_VALUE))
@@ -100,12 +91,10 @@ public class login_users extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(domain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
                     .addComponent(Exit))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,6 +125,7 @@ public class login_users extends javax.swing.JFrame {
            PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, txtusername.getText());
             pst.setString(2, txtpassword.getText());
+           
             rs = pst.executeQuery();
             if (rs.next()){
                 JOptionPane.showMessageDialog(null, "WELCOME");
@@ -157,10 +147,6 @@ public class login_users extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnSubmitActionPerformed
-
-    private void domainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_domainActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_domainActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,7 +186,6 @@ public class login_users extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Exit;
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JComboBox domain;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
