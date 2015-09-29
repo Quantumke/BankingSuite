@@ -6,24 +6,38 @@
 package banking.modules;
 import java.sql.*;
 import javax.swing.*;
+import java.sql.DriverManager;
 
 /**
  *
  * @author benson
  */
 public class MysqlConnect {
-    
-    Conection conn = null;
-    Public static Connection ConnectDB(){
+    Connection conn = null;
+             String url = "jdbc:mysql://localhost:3306/fms";
+             String dbName = "fms";
+             String driver = "com.mysql.jdbc.Driver"; //MYSQL Driver/connector added to libary.
+             String userName = "root"; //username to DB
+             String password = "master12!"; //password to DB (blank)
+             Statement st;
+             ResultSet rs;
+
+             //method that connects with conditional functions
+    public  static Connection ConnectDB(){
         try{
-            class.forName("com.mysql.jdbc.driver");
-                    Connection conn = DriverManager.getConnection("jdbc://mysql://localhost/fms", "root", "master12!");
-                    JOptionPane.showMessageDialog(null, "cannecton Established")
-                    return conn;
-        }
-            catch(Exception e){
-                   JOptionPane.showMessageDialog(null,e)
-                           return null;
-                    }
+            Class.forName("com.mysql.jdbc.Driver");
+        Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/fms","root","master12!");
+            System.out.println("Connection with Database Established");
+            
+            return conn;
+
     }
-}
+        //Exception is an error handling message that informs the user that connection wasn't successful
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Connection to the database has not been established successsfully." + e.getMessage());
+            System.out.println("Error:"+e);
+            return null;
+        }}}
+             
+
+    
