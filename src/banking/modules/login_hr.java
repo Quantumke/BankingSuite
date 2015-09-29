@@ -127,7 +127,7 @@ Connection conn  = null;
             rs = pst.executeQuery();
             if (rs.next()){
                 JOptionPane.showMessageDialog(null, "WELCOME");
-                index i= new index();
+                hr i= new hr();
                 i.setVisible(true);
                 
                 
