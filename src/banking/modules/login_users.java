@@ -132,7 +132,7 @@ public class login_users extends javax.swing.JFrame {
                 i.setVisible(true);
             }
             else
-                JOptionPane.showMessageDialog(null, "Login Failed",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Login Failed");
         }
        catch(Exception e){
            JOptionPane.showMessageDialog(null, e);
