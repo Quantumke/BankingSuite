@@ -75,6 +75,12 @@ Connection conn  = null;
 
         jLabel1.setText("SEARCH RECORDS");
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,6 +110,18 @@ Connection conn  = null;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        try{
+            String sql = "select from employees where name=?";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1,txtSearch.getText());
+        }
+        catch (Exception e){
+            
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
 
     /**
      * @param args the command line arguments
