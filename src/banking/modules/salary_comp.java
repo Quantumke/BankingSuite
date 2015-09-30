@@ -61,7 +61,6 @@ Connection conn  = null;
         jScrollPane1 = new javax.swing.JScrollPane();
         table_salary_comp = new javax.swing.JTable();
         txtBasic = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         txtHouse = new javax.swing.JTextField();
         txtDearness = new javax.swing.JTextField();
         txtTransport = new javax.swing.JTextField();
@@ -90,8 +89,6 @@ Connection conn  = null;
             }
         ));
         jScrollPane1.setViewportView(table_salary_comp);
-
-        jTextField2.setText("jTextField2");
 
         jLabel1.setText("Basic Salary");
 
@@ -147,13 +144,11 @@ Connection conn  = null;
                         .addComponent(Cmd_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtMedical, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMedical, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtTransport, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                        .addComponent(txtEntertainment))))
+                        .addComponent(txtEntertainment)))
+                .addGap(98, 98, 98))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -188,16 +183,13 @@ Connection conn  = null;
                                 .addGap(13, 13, 13)
                                 .addComponent(jLabel3)))
                         .addGap(24, 24, 24)
-                        .addComponent(Cmd_Save)
-                        .addGap(0, 15, Short.MAX_VALUE))
+                        .addComponent(Cmd_Save))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBasic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                            .addComponent(jLabel4))))
+                .addGap(18, 33, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -208,10 +200,10 @@ Connection conn  = null;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +236,7 @@ Connection conn  = null;
         // TODO add your handling code here:
          conn = MysqlConnect.ConnectDB();
        
-String sql ="update salary_components set Basic salary = ? , house _allowance=?,dearness_allowance=?,transport_llowance=?,entertainment_allowance=?,medical_allowance=? WHERE id =1";
+String sql ="Update salary_components set Basic salary = ? and house _allowance = ? and dearness_allowance= ? and transport_llowance= ? and entertainment_allowance=? and medical_allowance=? WHERE id =1";
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,txtBasic.getText());
@@ -311,7 +303,6 @@ String sql ="update salary_components set Basic salary = ? , house _allowance=?,
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable table_salary_comp;
     private javax.swing.JTextField txtBasic;
     private javax.swing.JTextField txtDearness;
