@@ -270,28 +270,27 @@ String sql ="update salary_components set Basic_salary = ? , house_allowance = ?
 
     private void table_dispMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_dispMouseClicked
         // TODO add your handling code here:
-        // TODO add your handling code here:
+   // TODO add your handling code here:
+           int row =table_disp.getSelectedRow();
+         String Table_click=(table_disp.getModel().getValueAt(row, 0).toString());
         try{
-             int row =table_disp.getSelectedRow();
-        
-              String Table_click=(table_disp.getModel().getValueAt(row, 0).toString());
-            String sql="Select * from salary_components'"+Table_click+"%'";
            
+           
+            String sql ="select  name,branch,position,supervisor,phone_number,status from employees where id= '"+Table_click+"' ";
           pst =conn.prepareStatement(sql);
           rs =pst.executeQuery();
           if (rs.next()){
-              String add1 =rs.getString("name");
+               String add1 =rs.getString("name");
              txtName.setText(add1);
-              String add2 =rs.getString("supervisor");
+              String add2 =rs.getString("branch");
              txtSup.setText(add1);
-              String add3 =rs.getString("branch");
+              String add3 =rs.getString("position");
              txtBranch.setText(add1);
              
-              String add4 =rs.getString("position");
+              String add4 =rs.getString("supervisor");
             txtPosition.setText(add4);
               String add5 =rs.getString("phone_number");
              txtPhone.setText(add5);
-             
           }
         }
         catch(Exception e){
