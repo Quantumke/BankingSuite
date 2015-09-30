@@ -226,15 +226,15 @@ Connection conn  = null;
              String Med_all  =txtMedical.getText();
         
         DefaultPieDataset pieDataset=new DefaultPieDataset();
-        pieDataset.setValue("one", new Integer(Basic_salary ));
-        pieDataset.setValue("two", new Integer(House_all));
-        pieDataset.setValue("three", new Integer(Dear_all));
-        pieDataset.setValue("four", new Integer(Trans_all));
-         pieDataset.setValue("five", new Integer(Ent_all));
-         pieDataset.setValue("six", new Integer(Med_all));
+        pieDataset.setValue("Basic_salary", new Double(Basic_salary ));
+        pieDataset.setValue("House_all", new Double(House_all));
+        pieDataset.setValue("Dear_all", new Double(Dear_all));
+        pieDataset.setValue("Trans_all", new Double(Trans_all));
+         pieDataset.setValue("Ent_all", new Double(Ent_all));
+         pieDataset.setValue("Med_all", new Double(Med_all));
   
         
-        JFreeChart chart = ChartFactory.createPieChart("pie chart", pieDataset, true,true,true);
+        JFreeChart chart = ChartFactory.createPieChart("parameter pie chart", pieDataset, true,true,true);
         PiePlot P =(PiePlot) chart.getPlot();
        // P.setForegroundAlpha(TOP_ALIGNMENT);
         ChartFrame frame = new ChartFrame("pie chart", chart);
