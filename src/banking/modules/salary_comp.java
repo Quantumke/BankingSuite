@@ -7,6 +7,10 @@ package banking.modules;
 import java.sql.*;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 /**
  *
@@ -127,6 +131,13 @@ Connection conn  = null;
         pieDataset.setValue("two", new Integer(20));
         pieDataset.setValue("three", new Integer(30));
         pieDataset.setValue("four", new Integer(40));
+        JFreeChart chart = ChartFactory.createPieChart("pie chart", pieDataset, true,true,true);
+        PiePlot P =(PiePlot) chart.getPlot();
+       // P.setForegroundAlpha(TOP_ALIGNMENT);
+        ChartFrame frame = new ChartFrame("pie chart", chart);
+        frame.setVisible(true);
+        frame.setSize(450,500);
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
