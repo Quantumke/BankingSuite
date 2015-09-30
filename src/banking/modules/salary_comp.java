@@ -88,6 +88,11 @@ Connection conn  = null;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        table_salary_comp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_salary_compMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_salary_comp);
 
         jLabel1.setText("Basic Salary");
@@ -268,6 +273,16 @@ String sql ="update salary_components set Basic_salary = ? , house_allowance = ?
 
     
     }//GEN-LAST:event_Cmd_SaveActionPerformed
+
+    private void table_salary_compMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_salary_compMouseClicked
+        // TODO add your handling code here:
+        try{
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_table_salary_compMouseClicked
 
     /**
      * @param args the command line arguments
