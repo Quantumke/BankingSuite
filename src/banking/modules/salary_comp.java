@@ -4,20 +4,43 @@
  * and open the template in the editor.
  */
 package banking.modules;
-
+import java.sql.*;
+import javax.swing.*;
+import net.proteanit.sql.DbUtils;
+import org.jfree.data.general.DefaultPieDataset;
 /**
  *
  * @author benson
  */
 public class salary_comp extends javax.swing.JFrame {
-
+Connection conn  = null;
+ PreparedStatement pst = null;
+ ResultSet rs = null;
     /**
      * Creates new form salary_comp
      */
     public salary_comp() {
         initComponents();
+      
+        conn = MysqlConnect.ConnectDB();
+        Sal_table();
+    }
+  private void Sal_table(){
+        try{
+       String sql = "select * from salary_components" ;
+       pst=conn.prepareStatement(sql);
+       rs=pst.executeQuery();
+       table_salary_comp.setModel(DbUtils.resultSetToTableModel(rs));
+       
+        }
+        catch(Exception e){
+          JOptionPane.showMessageDialog(null, e);
+        }
+        {
     }
 
+
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,11 +52,12 @@ public class salary_comp extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_salary_comp = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_salary_comp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -44,7 +68,14 @@ public class salary_comp extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table_salary_comp);
+
+        jButton1.setText("GRAPHS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -52,14 +83,20 @@ public class salary_comp extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jButton1)
                 .addGap(166, 166, 166))
         );
 
@@ -82,6 +119,16 @@ public class salary_comp extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultPieDataset pieDataset=new DefaultPieDataset();
+        pieDataset.setValue("one", new Integer(10));
+        pieDataset.setValue("two", new Integer(20));
+        pieDataset.setValue("three", new Integer(30));
+        pieDataset.setValue("four", new Integer(40));
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,8 +166,9 @@ public class salary_comp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table_salary_comp;
     // End of variables declaration//GEN-END:variables
 }
