@@ -217,11 +217,23 @@ Connection conn  = null;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        String Basic_salary  =txtBasic.getText();
+         String House_all  =txtHouse.getText();
+          String Dear_all  =txtDearness.getText();
+           String Trans_all  =txtTransport.getText();
+            String Ent_all =txtEntertainment.getText();
+             String Med_all  =txtMedical.getText();
+        
         DefaultPieDataset pieDataset=new DefaultPieDataset();
-        pieDataset.setValue("one", new Integer(10));
-        pieDataset.setValue("two", new Integer(20));
-        pieDataset.setValue("three", new Integer(30));
-        pieDataset.setValue("four", new Integer(40));
+        pieDataset.setValue("one", new Integer(Basic_salary ));
+        pieDataset.setValue("two", new Integer(House_all));
+        pieDataset.setValue("three", new Integer(Dear_all));
+        pieDataset.setValue("four", new Integer(Trans_all));
+         pieDataset.setValue("five", new Integer(Ent_all));
+         pieDataset.setValue("six", new Integer(Med_all));
+  
+        
         JFreeChart chart = ChartFactory.createPieChart("pie chart", pieDataset, true,true,true);
         PiePlot P =(PiePlot) chart.getPlot();
        // P.setForegroundAlpha(TOP_ALIGNMENT);
@@ -236,7 +248,7 @@ Connection conn  = null;
         // TODO add your handling code here:
          conn = MysqlConnect.ConnectDB();
        
-String sql ="Update salary_components set Basic salary = ? and house _allowance = ? and dearness_allowance= ? and transport_llowance= ? and entertainment_allowance=? and medical_allowance=? WHERE id =1";
+String sql ="update salary_components set Basic_salary = ? , house_allowance = ? , dearness_allowance= ? , transport_llowance= ? , entertainment_allowance=? , medical_allowance=? WHERE id =1";
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,txtBasic.getText());
