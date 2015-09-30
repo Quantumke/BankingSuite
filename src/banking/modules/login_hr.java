@@ -22,6 +22,7 @@ Connection conn  = null;
      */
     public login_hr() {
         initComponents();
+        conn = MysqlConnect.ConnectDB();
     }
 
     /**

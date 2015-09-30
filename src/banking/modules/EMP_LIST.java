@@ -4,22 +4,46 @@
  * and open the template in the editor.
  */
 package banking.modules;
+import java.sql.*;
+import javax.swing.*;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author benson
  */
 public class EMP_LIST extends javax.swing.JFrame {
-import java.sql.*;
-import javax.swing.*;
-import net.proteanit.sql.DbUtils;
+Connection conn  = null;
+ PreparedStatement pst = null;
+ ResultSet rs = null;
     /**
      * Creates new form EMP_LIST
      */
     public EMP_LIST() {
         initComponents();
+        conn = MysqlConnect.ConnectDB();
+        Update_table();
     }
 
+    
+    private void Update_table(){
+        try{
+       String sql = "select * from employees" ;
+       pst=conn.prepareStatement(sql);
+       rs=pst.executeQuery();
+       Table_render.setModel(DbUtils.resultSetToTableModel(rs));
+       
+        }
+        catch(Exception e){
+          JOptionPane.showMessageDialog(null, e);
+        }
+        {
+    }
+
+
+}
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
