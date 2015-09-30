@@ -239,10 +239,10 @@ Connection conn  = null;
          pieDataset.setValue("Med_all", new Double(Med_all));
   
         
-        JFreeChart chart = ChartFactory.createPieChart("parameter pie chart", pieDataset, true,true,true);
+        JFreeChart chart = ChartFactory.createPieChart("Renumaration pie chart", pieDataset, true,true,true);
         PiePlot P =(PiePlot) chart.getPlot();
        // P.setForegroundAlpha(TOP_ALIGNMENT);
-        ChartFrame frame = new ChartFrame("pie chart", chart);
+        ChartFrame frame = new ChartFrame("SALARY DISTRIBUTION", chart);
         frame.setVisible(true);
         frame.setSize(450,500);
         
