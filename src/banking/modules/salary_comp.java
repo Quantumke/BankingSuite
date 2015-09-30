@@ -277,7 +277,26 @@ String sql ="update salary_components set Basic_salary = ? , house_allowance = ?
     private void table_salary_compMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_salary_compMouseClicked
         // TODO add your handling code here:
         try{
-            
+            String sql="Select * from salary_components where id=1";
+            int row =table_salary_comp.getSelectedRow();
+          String Table_click=(table_salary_comp.getModel().getValueAt(row, 0).toString());
+          pst =conn.prepareStatement(sql);
+          rs =pst.executeQuery();
+          if (rs.next()){
+              String add1 =rs.getString("Basic_salary");
+             txtBasic.setText(add1);
+              String add2 =rs.getString("house_allowance");
+             txtHouse.setText(add1);
+              String add3 =rs.getString("dearness_allowance");
+             txtDearness.setText(add1);
+             
+              String add4 =rs.getString("transport_llowance");
+            txtTransport.setText(add4);
+              String add5 =rs.getString("entertainment_allowance");
+             txtEntertainment.setText(add5);
+              String add6 =rs.getString("medical_allowance");
+             txtMedical.setText(add6);
+          }
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
