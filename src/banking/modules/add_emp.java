@@ -69,6 +69,7 @@ Connection conn  = null;
         txtKRA = new javax.swing.JTextField();
         txtNHIF = new javax.swing.JTextField();
         txtNSSF = new javax.swing.JTextField();
+        txtRole = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,7 +194,7 @@ Connection conn  = null;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Cmd_Save))
         );
 
@@ -220,9 +221,6 @@ Connection conn  = null;
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -230,18 +228,22 @@ Connection conn  = null;
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel15))
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(txtKin)
-                            .addComponent(txtId)
-                            .addComponent(txtKRA)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNSSF)
-                                    .addComponent(txtNHIF, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(jLabel15)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPhone)
+                    .addComponent(txtKin)
+                    .addComponent(txtId)
+                    .addComponent(txtKRA)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNSSF)
+                            .addComponent(txtNHIF, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(txtRole))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -250,9 +252,11 @@ Connection conn  = null;
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel6)
-                .addGap(27, 27, 27)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -289,7 +293,7 @@ Connection conn  = null;
     private void Cmd_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cmd_SaveActionPerformed
         // TODO add your handling code here:
         conn = MysqlConnect.ConnectDB();
-        String sql="Insert into employees (name,gender,age,position,department,emptype,supervisor,role,branch,phone_number,next_of_kin,id_number,KRA_pin,NSSF,NHIF,status) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+        String sql="Insert into employees (name,gender,age,position,department,emptype,supervisor,role,branch,phone_number,next_of_kin,id_number,KRA_pin,NSSF,NHIF) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 
         try{
             pst = conn.prepareStatement(sql);
@@ -300,6 +304,21 @@ Connection conn  = null;
               pst.setString(5,txtEmployement.getSelectedItem().toString());
               pst.setString(6,txtEmployementtype.getText());
             pst.setString(7,txtSupervisor.getText());
+            
+             pst.setString(8,txtRole.getText());
+            pst.setString(9,txtBranch.getText());
+            pst.setString(10,txtPhone.getText());
+            pst.setString(11,txtKin.getText());
+            pst.setString(12,txtId.getText());
+            pst.setString(13,txtKRA.getText());
+             pst.setString(14,txtNSSF.getText());
+            pst.setString(16,txtNHIF.getText());
+          
+            
+            
+            
+            
+            
 
             pst.execute() ;
             JOptionPane.showMessageDialog(null, "saved");
@@ -381,6 +400,7 @@ Connection conn  = null;
     private javax.swing.JTextField txtNSSF;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JComboBox txtPosition;
+    private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtSupervisor;
     private javax.swing.JTextField txtname;
     // End of variables declaration//GEN-END:variables
