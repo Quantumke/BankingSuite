@@ -71,6 +71,8 @@ Connection conn  = null;
         txtPosition = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtSelect = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +126,15 @@ Connection conn  = null;
             }
         });
 
+        jLabel7.setText("Status");
+
+        txtSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--SELECT--", "Probation", "intern", "full", "managerial", "subordinate" }));
+        txtSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSelectActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,13 +169,20 @@ Connection conn  = null;
                         .addGap(52, 52, 52)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(31, 31, 31)
-                                .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtPhone)))))
+                                .addComponent(txtPhone))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(1, 1, 1)
+                                        .addComponent(txtSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(112, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(216, 216, 216)
@@ -196,7 +214,9 @@ Connection conn  = null;
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7)
+                    .addComponent(txtSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(jButton2)
                 .addGap(62, 62, 62))
@@ -248,15 +268,15 @@ Connection conn  = null;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          conn = MysqlConnect.ConnectDB();
-       
-String sql ="update employees set name = ? , supervisor = ? , branch= ? , position= ? , phone_number=?  WHERE id =1";
-        try{
+        String sql="UPDATE `employees` SET name='"+txtName.getText()+"' WHERE id =2";      
+try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,txtName.getText());
             pst.setString(2,txtSup.getText());
             pst.setString(3,txtBranch.getText());
              pst.setString(4,txtPosition.getText());  
             pst.setString(5,txtPhone.getText());
+            pst.setString(6, txtSelect.getSelectedItem().toString());
            
 
             pst.execute() ;
@@ -271,13 +291,13 @@ String sql ="update employees set name = ? , supervisor = ? , branch= ? , positi
 
     private void table_dispMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_dispMouseClicked
         // TODO add your handling code here:
-   // TODO add your handling code here:
+   // TODO add your handling code here:txtSelect.getSelectedItem().toString()
            int row =table_disp.getSelectedRow();
          String Table_click=(table_disp.getModel().getValueAt(row, 0).toString());
         try{
            
            
-            String sql ="select  name,branch,position,supervisor,phone_number,status from employees where name= '"+Table_click+"' ";
+    String sql ="select  name,branch,position,supervisor,phone_number,status from employees where name= '"+Table_click+"' ";
           pst =conn.prepareStatement(sql);
           rs =pst.executeQuery();
           if (rs.next()){
@@ -298,6 +318,10 @@ String sql ="update employees set name = ? , supervisor = ? , branch= ? , positi
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_table_dispMouseClicked
+
+    private void txtSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSelectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,6 +367,7 @@ String sql ="update employees set name = ? , supervisor = ? , branch= ? , positi
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table_disp;
@@ -351,6 +376,7 @@ String sql ="update employees set name = ? , supervisor = ? , branch= ? , positi
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtPosition;
     private javax.swing.JTextField txtSearchString;
+    private javax.swing.JComboBox txtSelect;
     private javax.swing.JTextField txtSup;
     // End of variables declaration//GEN-END:variables
 }

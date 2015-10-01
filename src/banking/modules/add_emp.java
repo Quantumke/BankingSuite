@@ -193,7 +193,7 @@ Connection conn  = null;
     private void Cmd_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cmd_SaveActionPerformed
         // TODO add your handling code here:
         conn = MysqlConnect.ConnectDB();
-        String sql="Insert into employees (name,gender,age,position,department,emptype,supervisor) value (?,?,?,?,?,?,?) ";
+        String sql="Insert into employees (name,gender,age,position,department,emptype,supervisor,role,branch,phone_number,next_of_kin,id_number,KRA_pin,NSSF,NHIF,status) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 
         try{
             pst = conn.prepareStatement(sql);
