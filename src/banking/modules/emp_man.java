@@ -389,32 +389,28 @@ Connection conn  = null;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          conn = MysqlConnect.ConnectDB();
-        String sql="UPDATE `employees` SET name='"+txtName.getText()+"' WHERE id =2";      
+ String query="UPDATE employees SET name=?,gender=?,age=?,position=?,department=?,emptype=?,supervisor=?,role=?,branch=?,phone_number=?,next_of_kin=?,id_number=?,KRA_pin=?,NSSF=?,NHIF=?,status=? WHERE name=? ";
 try{
-            pst = conn.prepareStatement(sql);
+            pst = conn.prepareStatement(query);
             pst.setString(1,txtName.getText());
-      
-            pst.setString(2,txtSup.getText());
-            pst.setString(3,txtBranch.getText());
-             pst.setString(4,txtPosition.getText());  
-            pst.setString(5,txtPhone.getText());
-            pst.setString(6, txtSelect.getSelectedItem().toString());
-            
-             pst.setString(7,txtName.getText());
-            pst.setString(8,txtSup.getText());
+             pst.setString(2,txtGender.getText());
+             pst.setString(3,txtAge.getText());
+             pst.setString(4,txtPosition.getText());
+             pst.setString(5,txtDep.getText());
+            pst.setString(6,txtEmptype.getText());  
+            pst.setString(7,txtSup.getText());
+             pst.setString(8,txtRole.getText());
             pst.setString(9,txtBranch.getText());
-             pst.setString(10,txtPosition.getText());  
-            pst.setString(11,txtPhone.getText());
-            
-             pst.setString(12,txtName.getText());
-            pst.setString(13,txtSup.getText());
-            pst.setString(14,txtBranch.getText());
-             pst.setString(15,txtPosition.getText());  
-            pst.setString(16,txtPhone.getText());
-            
+            pst.setString(10,txtPhone.getText());
+             pst.setString(11,txtKin.getText());
+            pst.setString(12,txtId.getText());
+            pst.setString(13,txtKRA.getText());
+             pst.setString(14,txtNSSF.getText());  
+            pst.setString(15,txtNHIF.getText());
+             pst.setString(0, txtSelect.getSelectedItem().toString());
            
 
-            pst.execute() ;
+           pst.executeUpdate(); 
             JOptionPane.showMessageDialog(null, "Updated");
         }
 
