@@ -140,17 +140,18 @@ Connection conn  = null;
                         .addGap(60, 60, 60)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
                                 .addGap(46, 46, 46)
                                 .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addGap(18, 18, 18)
+                                .addContainerGap()
+                                .addComponent(jLabel3)
+                                .addGap(29, 29, 29)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtSup)
                                     .addComponent(txtBranch))))
@@ -165,8 +166,8 @@ Connection conn  = null;
                                 .addGap(18, 18, 18)
                                 .addComponent(txtPhone)))))
                 .addContainerGap(112, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(216, 216, 216)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -189,16 +190,16 @@ Connection conn  = null;
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel3)
                     .addComponent(txtSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(40, 40, 40)
                 .addComponent(jButton2)
-                .addGap(84, 84, 84))
+                .addGap(62, 62, 62))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,7 +249,7 @@ Connection conn  = null;
         // TODO add your handling code here:
          conn = MysqlConnect.ConnectDB();
        
-String sql ="update salary_components set Basic_salary = ? , house_allowance = ? , dearness_allowance= ? , transport_llowance= ? , entertainment_allowance=? , medical_allowance=? WHERE id =1";
+String sql ="update employees set name = ? , supervisor = ? , branch= ? , position= ? , phone_number=?  WHERE id =1";
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,txtName.getText());
@@ -276,18 +277,18 @@ String sql ="update salary_components set Basic_salary = ? , house_allowance = ?
         try{
            
            
-            String sql ="select  name,branch,position,supervisor,phone_number,status from employees where id= '"+Table_click+"' ";
+            String sql ="select  name,branch,position,supervisor,phone_number,status from employees where name= '"+Table_click+"' ";
           pst =conn.prepareStatement(sql);
           rs =pst.executeQuery();
           if (rs.next()){
                String add1 =rs.getString("name");
              txtName.setText(add1);
               String add2 =rs.getString("branch");
-             txtSup.setText(add1);
-              String add3 =rs.getString("position");
-             txtBranch.setText(add1);
+             txtSup.setText(add2);
+              String add3 =rs.getString("supervisor");
+             txtBranch.setText(add3);
              
-              String add4 =rs.getString("supervisor");
+              String add4 =rs.getString("position");
             txtPosition.setText(add4);
               String add5 =rs.getString("phone_number");
              txtPhone.setText(add5);
