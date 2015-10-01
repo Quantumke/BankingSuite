@@ -277,6 +277,19 @@ try{
              pst.setString(4,txtPosition.getText());  
             pst.setString(5,txtPhone.getText());
             pst.setString(6, txtSelect.getSelectedItem().toString());
+            
+             pst.setString(7,txtName.getText());
+            pst.setString(8,txtSup.getText());
+            pst.setString(9,txtBranch.getText());
+             pst.setString(10,txtPosition.getText());  
+            pst.setString(11,txtPhone.getText());
+            
+             pst.setString(12,txtName.getText());
+            pst.setString(13,txtSup.getText());
+            pst.setString(14,txtBranch.getText());
+             pst.setString(15,txtPosition.getText());  
+            pst.setString(16,txtPhone.getText());
+            
            
 
             pst.execute() ;
