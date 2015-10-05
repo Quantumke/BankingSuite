@@ -389,7 +389,7 @@ Connection conn  = null;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          conn = MysqlConnect.ConnectDB();
- String query="UPDATE employees SET name=?,gender=?,age=?,position=?,department=?,emptype=?,supervisor=?,role=?,branch=?,phone_number=?,next_of_kin=?,id_number=?,KRA_pin=?,NSSF=?,NHIF=?,status=? WHERE name=? ";
+ String query="UPDATE employees SET name=?,gender=?,age=?,position=?,department=?,emptype=?,supervisor=?,role=?,branch=?,phone_number=?,next_of_kin=?,id_number=?,KRA_pin=?,NSSF=?,NHIF=?,status=? WHERE name='ben' ";
 try{
             pst = conn.prepareStatement(query);
             pst.setString(1,txtName.getText());
@@ -407,7 +407,7 @@ try{
             pst.setString(13,txtKRA.getText());
              pst.setString(14,txtNSSF.getText());  
             pst.setString(15,txtNHIF.getText());
-             pst.setString(0, txtSelect.getSelectedItem().toString());
+             pst.setString(16, txtSelect.getSelectedItem().toString());
            
 
            pst.executeUpdate(); 

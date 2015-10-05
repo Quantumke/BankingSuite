@@ -131,11 +131,15 @@ public class login_users extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "WELCOME");
                 index i= new index();
                 i.setVisible(true);
-                
+               txtusername.setText("");
+               txtpassword.setText("");
                 
             }
             else
                 JOptionPane.showMessageDialog(null, "Login Failed");
+            
+               txtusername.setText("");
+               txtpassword.setText("");
         }
         
        catch(Exception e){
